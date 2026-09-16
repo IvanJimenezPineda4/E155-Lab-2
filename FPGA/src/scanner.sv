@@ -10,7 +10,7 @@ module scanner (input logic clk,
 
     logic [24:0] scan_count; // 25-bit counter. 
 
-    lab2_counter #(.width(25)) scan_cntr (.clk(clk), .reset(reset), enable(enable), .count(scan_count));
+    lab2_counter #(.width(25)) scan_cntr (.clk(clk), .reset(reset), .enable(enable), .count(scan_count));
 
     logic [1:0] state; // top two bits of scan_count to form a 4-state machine
     assign state = scan_count[24:23];

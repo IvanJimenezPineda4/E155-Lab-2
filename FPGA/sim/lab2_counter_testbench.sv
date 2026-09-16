@@ -3,7 +3,7 @@
 // 9/15/2026
 // Testbench for lab2_counter.sv
 
-'timescale 1ns/1ps
+`timescale 1ns/1ps
 
 module lab2_counter_testbench();
     logic clk;
@@ -12,7 +12,7 @@ module lab2_counter_testbench();
     logic [3:0] count;
 
     // 4-bit width
-    lab2_counter #(.WIDTH(4)) dut (.clk(clk), .reset(reset), .enable(enable), .count(count));
+    lab2_counter #(.width(4)) dut (.clk(clk), .reset(reset), .enable(enable), .count(count));
 
     // Generate the simulated clock 
     always begin 

@@ -15,7 +15,7 @@ module lab2_ivan_testbench();
     logic [3:0] rows;
     logic [3:0] led;
 
-    lab2_top dut (.reset(reset), .dip_s(dip_s), .bread_s(bread_s), .column(column), .seg(seg), .anode(anode), .rows(rows), .led(led));
+    lab2_ivan dut (.reset(reset), .dip_s(dip_s), .bread_s(bread_s), .column(column), .seg(seg), .anode(anode), .rows(rows), .led(led));
 
     initial begin
         // Hold reset, set distinct hex values for the two displays
