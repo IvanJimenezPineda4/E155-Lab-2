@@ -31,7 +31,7 @@ module lab2_ivan (input logic reset,
 
     scanner keypad_scan (.clk(int_osc), .reset(reset), .enable(1'b1), .row_scan(rows));
 
-    assign led = column;
-    
+    assign led = ~column;
+
 endmodule
 
