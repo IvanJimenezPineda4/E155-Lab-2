@@ -21,17 +21,32 @@ module scanner_testbench();
 
     initial begin
         // Initialize and reset
-        reset = 0; enable = 0; #20;
+        reset = 0; enable = 1; #20;
         assert(row_scan == 4'b1000) else $error("Reset state failed (expected 1000)");
 
-        // Release reset and enable counting
-        reset = 1; enable = 1;
+        // Release reset and allow counting to the next state
+        reset = 1;
         
         // Bit 23 toggles after 2^23 clock cycles. 
         // 2^23 cycles * 10ns = 83,886,080 ns delay per state transition
         #83886100;
         assert(row_scan == 4'b0100) else $error("State 01 transition failed");
         
+        enable = 0; // toggle enable off (pause the counter)
+        #500000;
+        assert(row_scan == 4'b0100) else $error("Enable failed, state changed while disabled");
+        
+        enable = 1; // resume counting
+        #83886080;
+        assert(row_scan == 4'b0010) else $error("State 10 transition failed");
+
+        reset = 0; #20;
+        assert(row_scan == 4'b1000) else $error("Reset failed");
+        
+        reset = 1; // release reset
+        #83886100;
+        assert(row_scan == 4'b0100) else $error ("Reset recovery failed, state 01 transition failed");
+
         #83886080;
         assert(row_scan == 4'b0010) else $error("State 10 transition failed");
 
